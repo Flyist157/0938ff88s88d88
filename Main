@@ -1,0 +1,213 @@
+#!/usr/bin/env bash
+set -e
+
+# 1️⃣ Create directory structure
+mkdir -p data/raw data/embeddings \
+         scripts \
+         ingestion_service \
+         retrieval_service \
+         tts_service \
+         api_gateway
+
+# 2️⃣ Top-level files
+
+cat > README.md << 'EOF'
+# 737 Safety Assistant MVP
+
+## Structure
+- **data/raw** – your source corpus (paste your full JSON here)
+- **data/embeddings** – output of embedding script
+- **scripts/index_embeddings.py** – generate embeddings
+- **ingestion_service/** – SimConnect ​→ API Gateway
+- **retrieval_service/** – vector DB client + RAG prompt + LLM call
+- **tts_service/** – TTS wrapper
+- **api_gateway/** – FastAPI orchestrator
+- **docker-compose.yml** – spin up services
+EOF
+
+cat > docker-compose.yml << 'EOF'
+version: '3.8'
+services:
+  milvus:
+    image: milvusdb/milvus-standalone:2.2.5
+    ports:
+      - "19530:19530"
+
+  api_gateway:
+    build: ./api_gateway
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - milvus
+
+  ingestion_service:
+    build: ./ingestion_service
+    command: python simconnect_client.py
+    depends_on:
+      - api_gateway
+
+  retrieval_service:
+    build: ./retrieval_service
+    command: python vector_client.py
+    depends_on:
+      - api_gateway
+      - milvus
+
+  tts_service:
+    build: ./tts_service
+    command: python tts_client.py
+    depends_on:
+      - api_gateway
+EOF
+
+# 3️⃣ scripts/index_embeddings.py
+cat > scripts/index_embeddings.py << 'EOF'
+import json
+import openai
+
+openai.api_key = "YOUR_API_KEY"
+
+def index_embeddings():
+    docs = json.load(open("data/raw/b737_corpus.json"))
+    for entry in docs["procedures"]:
+        text = " ".join(entry["steps"])
+        resp = openai.Embedding.create(input=text, model="text-embedding-ada-002")
+        entry["embedding"] = resp["data"][0]["embedding"]
+    with open("data/embeddings/b737_corpus_embedded.json", "w") as f:
+        json.dump(docs, f, indent=2)
+
+if __name__ == "__main__":
+    index_embeddings()
+EOF
+
+# 4️⃣ ingestion_service stubs
+cat > ingestion_service/requirements.txt << 'EOF'
+pysimconnect
+requests
+pydantic
+EOF
+
+cat > ingestion_service/models.py << 'EOF'
+from pydantic import BaseModel
+
+class FlightState(BaseModel):
+    timestamp: str
+    gear: int
+    flaps_index: int
+    autopilot: dict
+    spoilers: int
+    airspeed: float
+    aoa: float
+    # add other controls as needed
+EOF
+
+cat > ingestion_service/simconnect_client.py << 'EOF'
+import json
+import requests
+from models import FlightState
+
+def start_ingestion():
+    # TODO: implement SimConnect polling here
+    dummy = FlightState(
+        timestamp="2025-05-05T00:00:00Z",
+        gear=0, flaps_index=0, autopilot={}, spoilers=0,
+        airspeed=0.0, aoa=0.0
+    )
+    r = requests.post("http://api_gateway:8000/state", json=dummy.dict())
+    print("Gateway response:", r.json())
+
+if __name__ == "__main__":
+    start_ingestion()
+EOF
+
+# 5️⃣ retrieval_service stubs
+cat > retrieval_service/requirements.txt << 'EOF'
+pymilvus
+openai
+EOF
+
+cat > retrieval_service/vector_client.py << 'EOF'
+from pymilvus import connections, Collection
+
+def init_vector_db():
+    connections.connect("default", host="milvus", port="19530")
+    return Collection("b737_procedures") # ensure this exists
+EOF
+
+cat > retrieval_service/rag_prompt.py << 'EOF'
+def build_prompt(state, docs):
+    system = "You are a flight safety assistant for the Boeing 737."
+    docs_text = "\\n\\n".join([d["text"] for d in docs])
+    user = f"Flight state: {state}"
+    return [
+      {"role":"system", "content": system + "\\n\\n" + docs_text},
+      {"role":"user", "content": user}
+    ]
+EOF
+
+cat > retrieval_service/llm_client.py << 'EOF'
+import openai
+openai.api_key = "YOUR_API_KEY"
+
+def call_llm(messages):
+    resp = openai.ChatCompletion.create(model="gpt-4", messages=messages)
+    return resp.choices[0].message.content
+EOF
+
+# 6️⃣ tts_service stub
+cat > tts_service/requirements.txt << 'EOF'
+pyttsx3
+EOF
+
+cat > tts_service/tts_client.py << 'EOF'
+import pyttsx3
+
+def speak(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
+
+if __name__ == "__main__":
+    speak("737 Safety Assistant online.")
+EOF
+
+# 7️⃣ api_gateway stubs
+cat > api_gateway/requirements.txt << 'EOF'
+fastapi
+uvicorn
+requests
+pydantic
+EOF
+
+cat > api_gateway/main.py << 'EOF'
+from fastapi import FastAPI
+from pydantic import BaseModel
+from retrieval_service.vector_client import init_vector_db
+from retrieval_service.rag_prompt import build_prompt
+from retrieval_service.llm_client import call_llm
+from tts_service.tts_client import speak
+
+app = FastAPI()
+
+class FlightState(BaseModel):
+    timestamp: str
+    gear: int
+    flaps_index: int
+    autopilot: dict
+    spoilers: int
+    airspeed: float
+    aoa: float
+
+@app.post("/state")
+async def ingest(state: FlightState):
+    col = init_vector_db()
+    # TODO: embed state + query col for top docs
+    docs = [] # placeholder
+    messages = build_prompt(state.dict(), docs)
+    advice = call_llm(messages)
+    speak(advice)
+    return {"advice": advice}
+EOF
+
+echo"
