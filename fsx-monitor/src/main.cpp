@@ -35,11 +35,13 @@ int main(int argc, char** argv) {
         simMonitor.start();
         fsuipcMonitor.start();
 
+        logger.setDashboardMode(true);
         logger.info("FSX monitor running. Press Ctrl+C to exit.");
 
         while (!g_shouldExit.load()) {
             simMonitor.pump();
             fsuipcMonitor.pump();
+            logger.renderDashboard();
             std::this_thread::sleep_for(10ms);
         }
 

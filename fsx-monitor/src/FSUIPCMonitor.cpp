@@ -38,7 +38,6 @@ void FSUIPCMonitor::pump()
 #if defined(_WIN32) && defined(FSUIPC_CLIENT_ENABLED)
     DWORD dwResult = 0;
     // We'll read each configured offset sequentially and process in one call
-    std::unordered_map<unsigned int, std::string> valueByOffset;
     for (const auto& off : _config.fsuipcOffsets) {
         unsigned char buffer[8] = {0};
         if (!FSUIPC_Read(off.offset, off.size, buffer, &dwResult)) {

@@ -50,8 +50,8 @@ void SimConnectMonitor::start()
                 static_cast<DWORD>(var.definitionId),
                 static_cast<DWORD>(var.definitionId),
                 SIMCONNECT_OBJECT_ID_USER,
-                SIMCONNECT_PERIOD_SECOND,
-                SIMCONNECT_DATA_REQUEST_FLAG_CHANGED
+                SIMCONNECT_PERIOD_VISUAL_FRAME,
+                0
             );
             if (r != S_OK) {
                 _logger.warn("SimConnect_RequestDataOnSimObject failed for " + var.name);
