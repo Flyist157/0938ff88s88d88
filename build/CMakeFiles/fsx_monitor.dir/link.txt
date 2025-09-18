@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Xlinker --dependency-file=CMakeFiles/fsx_monitor.dir/link.d CMakeFiles/fsx_monitor.dir/src/main.cpp.o CMakeFiles/fsx_monitor.dir/src/Logger.cpp.o CMakeFiles/fsx_monitor.dir/src/Config.cpp.o CMakeFiles/fsx_monitor.dir/src/SimConnectMonitor.cpp.o CMakeFiles/fsx_monitor.dir/src/FSUIPCMonitor.cpp.o -o fsx_monitor

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <chrono>
 #include <iomanip>
+#include <algorithm>
 
 static std::string nowIso8601()
 {
