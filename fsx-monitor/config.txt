@@ -1,0 +1,16 @@
+# Output files (optional). If omitted, defaults are used.
+CSV=fsx_monitor.csv
+# NDJSON=fsx_monitor.ndjson
+
+# SimConnect variables to subscribe: name|unit|datum
+SIMVAR=PLANE ALTITUDE|feet|number
+SIMVAR=PLANE LATITUDE|degrees|number
+SIMVAR=PLANE LONGITUDE|degrees|number
+SIMVAR=AIRSPEED INDICATED|knots|number
+
+# FSUIPC offsets to read: offset_hex|size|name|type
+# Examples:
+FSUIPC=0x02BC|4|AirspeedIndicated|i32
+FSUIPC=0x3324|8|Latitude|f64
+FSUIPC=0x0560|8|Longitude|f64
+
