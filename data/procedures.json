@@ -1,0 +1,45 @@
+{
+  "procedures": [
+    {
+      "id": "stall_recovery",
+      "title": "Stall Recovery",
+      "phase": "All",
+      "summary": "Recover promptly from an impending or fully developed aerodynamic stall.",
+      "spokenSummary": "Disconnect the autopilot, reduce the angle of attack, add thrust, and level the wings.",
+      "steps": [
+        "Autopilot – Disconnect",
+        "Pitch – Nose down to reduce angle of attack",
+        "Thrust – Apply maximum available",
+        "Bank – Level wings using coordinated inputs",
+        "Climb – Recover to a safe airspeed before resuming climb"
+      ]
+    },
+    {
+      "id": "landing_gear_down_check",
+      "title": "Landing Gear Down Confirmation",
+      "phase": "Approach",
+      "summary": "Ensure landing gear is down and locked before landing.",
+      "spokenSummary": "Select gear down and confirm three green before continuing the approach.",
+      "steps": [
+        "Gear lever – Down",
+        "Indications – Verify three green lights",
+        "Speed brake – Armed as required",
+        "Callout – 'Gear down, three green'"
+      ]
+    },
+    {
+      "id": "unstable_approach_go_around",
+      "title": "Unstable Approach Go-Around",
+      "phase": "Approach",
+      "summary": "Execute a go-around when the approach is unstable or sink rate is excessive.",
+      "spokenSummary": "Initiate a go-around: go-around thrust, pitch up, retract spoilers, and climb away.",
+      "steps": [
+        "Thrust levers – TOGA",
+        "Pitch – 15 degrees initially, adjust to maintain climb",
+        "Spoilers – Verify retracted",
+        "Gear – Up on positive rate",
+        "Flaps – Retract on schedule"
+      ]
+    }
+  ]
+}
