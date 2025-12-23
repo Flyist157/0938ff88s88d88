@@ -64,7 +64,11 @@ class ProvenanceModule(SignalModule):
                     value=0.1,
                     reliability=0.9,
                     evidence_refs={"schema": schema},
-                    raw={"has_pub": bool(pub_b64), "has_sig": bool(signature_b64), "sha_matches": sha_ok},
+                    raw={
+                        "has_pub": bool(pub_b64),
+                        "has_sig": bool(signature_b64),
+                        "sha_matches": sha_ok,
+                    },
                 )
             ]
 

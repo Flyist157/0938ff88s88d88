@@ -1,0 +1,33 @@
+services:
+  mti-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.mti
+    environment:
+      MTI_DB_URL: "sqlite+aiosqlite:////data/mti.db"
+      MTI_OBJECT_STORE_DIR: "/data/object_store"
+      MTI_SIGNING_KEY_PATH: "/data/mti_signing_key.ed25519"
+      MTI_SIGNING_PUBKEY_PATH: "/data/mti_signing_key.pub"
+    ports:
+      - "8000:8000"
+    volumes:
+      - mti_data:/data
+
+  mti-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.mti
+    command: ["mti-worker"]
+    environment:
+      MTI_DB_URL: "sqlite+aiosqlite:////data/mti.db"
+      MTI_OBJECT_STORE_DIR: "/data/object_store"
+      MTI_SIGNING_KEY_PATH: "/data/mti_signing_key.ed25519"
+      MTI_SIGNING_PUBKEY_PATH: "/data/mti_signing_key.pub"
+    volumes:
+      - mti_data:/data
+    depends_on:
+      - mti-api
+
+volumes:
+  mti_data: {}
+

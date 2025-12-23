@@ -4,7 +4,6 @@ import dataclasses
 from pathlib import Path
 from typing import Any, Literal
 
-
 MediaType = Literal["image", "video", "audio", "unknown"]
 
 

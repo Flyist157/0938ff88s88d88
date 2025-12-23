@@ -19,7 +19,10 @@ class WatermarkModule(SignalModule):
                 reliability=0.15,
                 evidence_refs={},
                 raw={
-                    "note": "watermark detection not implemented in reference build; absence is not evidence",
+                    "note": (
+                        "watermark detection not implemented in reference build; "
+                        "absence is not evidence"
+                    ),
                     "media_type": ctx.media_type,
                 },
             )

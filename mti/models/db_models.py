@@ -15,7 +15,10 @@ class Artifact(Base):
 
     id: Mapped[str] = mapped_column(String(64), primary_key=True)
     filename: Mapped[str] = mapped_column(String(512), nullable=False)
-    media_type: Mapped[str] = mapped_column(String(64), nullable=False)  # image|video|audio|unknown
+    media_type: Mapped[str] = mapped_column(
+        String(64),
+        nullable=False,
+    )  # image|video|audio|unknown
     content_type: Mapped[str] = mapped_column(String(128), nullable=False)
 
     sha256: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
@@ -24,13 +27,19 @@ class Artifact(Base):
     object_path: Mapped[str] = mapped_column(String(1024), nullable=False)
     manifest_object_path: Mapped[str | None] = mapped_column(String(1024), nullable=True)
 
-    created_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=dt.datetime.utcnow)
+    created_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: dt.datetime.now(dt.UTC),
+    )
 
-    jobs: Mapped[list["Job"]] = relationship(back_populates="artifact", cascade="all, delete-orphan")
-    signals: Mapped[list["SignalResult"]] = relationship(
+    jobs: Mapped[list[Job]] = relationship(
+        back_populates="artifact",
+        cascade="all, delete-orphan",
+    )
+    signals: Mapped[list[SignalResult]] = relationship(
         back_populates="artifact", cascade="all, delete-orphan"
     )
-    report: Mapped["TrustReport | None"] = relationship(
+    report: Mapped[TrustReport | None] = relationship(
         back_populates="artifact", cascade="all, delete-orphan", uselist=False
     )
 
@@ -39,17 +48,28 @@ class Job(Base):
     __tablename__ = "jobs"
 
     id: Mapped[str] = mapped_column(String(64), primary_key=True)
-    artifact_id: Mapped[str] = mapped_column(String(64), ForeignKey("artifacts.id"), index=True)
-    status: Mapped[str] = mapped_column(String(32), nullable=False, index=True)  # queued|running|succeeded|failed
+    artifact_id: Mapped[str] = mapped_column(
+        String(64),
+        ForeignKey("artifacts.id"),
+        index=True,
+    )
+    status: Mapped[str] = mapped_column(
+        String(32),
+        nullable=False,
+        index=True,
+    )  # queued|running|succeeded|failed
 
-    created_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=dt.datetime.utcnow)
+    created_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: dt.datetime.now(dt.UTC),
+    )
     started_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     completed_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     analysis_version: Mapped[str] = mapped_column(String(64), nullable=False)
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
 
-    artifact: Mapped["Artifact"] = relationship(back_populates="jobs")
+    artifact: Mapped[Artifact] = relationship(back_populates="jobs")
 
 
 class SignalResult(Base):
@@ -68,21 +88,31 @@ class SignalResult(Base):
     evidence_refs: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
     raw: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
 
-    created_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=dt.datetime.utcnow)
+    created_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: dt.datetime.now(dt.UTC),
+    )
 
-    artifact: Mapped["Artifact"] = relationship(back_populates="signals")
+    artifact: Mapped[Artifact] = relationship(back_populates="signals")
 
 
 class TrustReport(Base):
     __tablename__ = "trust_reports"
 
-    artifact_id: Mapped[str] = mapped_column(String(64), ForeignKey("artifacts.id"), primary_key=True)
+    artifact_id: Mapped[str] = mapped_column(
+        String(64),
+        ForeignKey("artifacts.id"),
+        primary_key=True,
+    )
 
     trust_score: Mapped[int] = mapped_column(Integer, nullable=False)
     confidence_low: Mapped[int] = mapped_column(Integer, nullable=False)
     confidence_high: Mapped[int] = mapped_column(Integer, nullable=False)
     max_trust_cap: Mapped[int] = mapped_column(Integer, nullable=False)
-    status: Mapped[str] = mapped_column(String(64), nullable=False)  # verified|unverified|inconclusive|contradicted
+    status: Mapped[str] = mapped_column(
+        String(64),
+        nullable=False,
+    )  # verified|unverified|inconclusive|contradicted
 
     contradictions: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
     recommendations: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
@@ -91,16 +121,22 @@ class TrustReport(Base):
     report_signature_b64: Mapped[str] = mapped_column(Text, nullable=False)
     signer_pubkey_b64: Mapped[str] = mapped_column(Text, nullable=False)
 
-    created_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=dt.datetime.utcnow)
+    created_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: dt.datetime.now(dt.UTC),
+    )
 
-    artifact: Mapped["Artifact"] = relationship(back_populates="report")
+    artifact: Mapped[Artifact] = relationship(back_populates="report")
 
 
 class AuditLog(Base):
     __tablename__ = "audit_log"
 
     id: Mapped[str] = mapped_column(String(64), primary_key=True)
-    created_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=dt.datetime.utcnow)
+    created_at: Mapped[dt.datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: dt.datetime.now(dt.UTC),
+    )
 
     event_type: Mapped[str] = mapped_column(String(128), nullable=False, index=True)
     artifact_id: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)

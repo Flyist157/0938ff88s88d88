@@ -1,0 +1,4 @@
+[console_scripts]
+mti-api = mti.api.main:main
+mti-capture = mti.capture.cli:app
+mti-worker = mti.worker:main

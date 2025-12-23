@@ -38,7 +38,8 @@ def compute_trust(signals: list[SignalCandidate]) -> TrustResult:
     Evidence-first scoring.
     - Provenance verification can cap or sharply reduce trust.
     - Other signals adjust within the cap.
-    - Uncertainty is explicit via confidence bands (derived from effective reliability and contradictions).
+    - Uncertainty is explicit via confidence bands derived from effective reliability
+      and contradictions.
     """
     contradictions: list[dict[str, Any]] = []
     recommendations: list[dict[str, Any]] = []
@@ -47,7 +48,12 @@ def compute_trust(signals: list[SignalCandidate]) -> TrustResult:
     sha_bind = _get_signal(signals, "prov.manifest.sha256_binding")
     manifest_present = _get_signal(signals, "prov.manifest.present")
 
-    provenance_verified = bool(sig_valid and sig_valid.finding == "valid" and sha_bind and sha_bind.finding == "match")
+    provenance_verified = bool(
+        sig_valid
+        and sig_valid.finding == "valid"
+        and sha_bind
+        and sha_bind.finding == "match"
+    )
     provenance_invalid = bool(sig_valid and sig_valid.finding == "invalid") or bool(
         sha_bind and sha_bind.finding == "mismatch"
     )
@@ -70,7 +76,8 @@ def compute_trust(signals: list[SignalCandidate]) -> TrustResult:
     score = base * max_cap
 
     # Aggregate non-provenance signals as weak/medium evidence.
-    # Map each signal's value to a delta around neutral 0.5, scaled by reliability and pillar weight.
+    # Map each signal's value to a delta around neutral 0.5,
+    # scaled by reliability and pillar weight.
     pillar_weights: dict[str, float] = {
         "forensics": 0.9,
         "watermark": 0.6,
@@ -101,7 +108,9 @@ def compute_trust(signals: list[SignalCandidate]) -> TrustResult:
     else:
         eff_rel = 0.0
 
-    # Contradiction detection: provenance verified but strong forensics implausible, or provenance invalid but high others.
+    # Contradiction detection:
+    # - provenance verified but strong forensics says "implausible"
+    # - provenance invalid while others appear high (handled via caps/recommendations)
     impl = _get_signal(signals, "img.encoding.plausibility")
     if provenance_verified and impl and impl.finding == "implausible" and impl.reliability >= 0.6:
         contradictions.append(

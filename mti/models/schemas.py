@@ -5,7 +5,6 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
-
 MediaType = Literal["image", "video", "audio", "unknown"]
 JobStatus = Literal["queued", "running", "succeeded", "failed"]
 
@@ -63,6 +62,8 @@ class TrustReportOut(BaseModel):
     contradictions: list[dict[str, Any]] = Field(default_factory=list)
     recommendations: list[dict[str, Any]] = Field(default_factory=list)
     audit: dict[str, Any]
+    report_signature_b64: str | None = None
+    signer_pubkey_b64: str | None = None
 
 
 class PolicyEvaluateRequest(BaseModel):

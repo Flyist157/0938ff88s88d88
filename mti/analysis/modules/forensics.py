@@ -75,7 +75,8 @@ class ForensicsModule(SignalModule):
 
         qinfo = _jpeg_quant_table_strength(img) if fmt == "JPEG" else None
         # Rough "recompression suspicion" heuristic:
-        # - Very low quality JPEG + missing EXIF can be benign (platform transcode), but degrades evidentiary value.
+        # - Very low quality JPEG + missing EXIF can be benign (platform transcode),
+        #   but it degrades evidentiary value.
         compression_deg = 0.0
         if qinfo is not None:
             q_mean = float(qinfo["q_mean"])
@@ -148,7 +149,14 @@ class ForensicsModule(SignalModule):
                 value=0.2 if implausible else 0.8,
                 reliability=0.7,
                 evidence_refs={},
-                raw={"width": w, "height": h, "format": fmt, "mode": mode, "size_mib": size_mib, "bpp": bpp},
+                raw={
+                    "width": w,
+                    "height": h,
+                    "format": fmt,
+                    "mode": mode,
+                    "size_mib": size_mib,
+                    "bpp": bpp,
+                },
             )
         )
         return candidates

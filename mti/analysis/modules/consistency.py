@@ -8,8 +8,9 @@ class ConsistencyModule(SignalModule):
     name = "consistency"
 
     async def analyze(self, ctx: ArtifactContext) -> list[SignalCandidate]:
-        # Reference implementation: minimal checks; production would do temporal/physical constraints.
-        # Here we only emit an explicit "not assessed" with low reliability to avoid false certainty.
+        # Reference implementation: minimal checks.
+        # Production would do temporal/physical constraints.
+        # We emit an explicit "not assessed" with low reliability to avoid false certainty.
         return [
             SignalCandidate(
                 pillar="consistency",

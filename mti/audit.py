@@ -16,7 +16,12 @@ from mti.util.ids import new_ulid
 
 
 def _canonical_json(obj: Any) -> bytes:
-    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return json.dumps(
+        obj,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
 
 
 def _sha256_hex(data: bytes) -> str:
@@ -38,12 +43,16 @@ async def append_audit_event(
 
     # Get previous entry hash for a simple global hash chain.
     prev_hash: str | None = None
-    last = (await session.execute(select(AuditLog).order_by(AuditLog.created_at.desc()).limit(1))).scalar_one_or_none()
+    last = (
+        await session.execute(
+            select(AuditLog).order_by(AuditLog.created_at.desc()).limit(1)
+        )
+    ).scalar_one_or_none()
     if last is not None:
         prev_hash = last.entry_hash
 
     entry = {
-        "created_at": dt.datetime.utcnow().isoformat() + "Z",
+        "created_at": dt.datetime.now(dt.UTC).isoformat(),
         "event_type": event_type,
         "artifact_id": artifact_id,
         "job_id": job_id,

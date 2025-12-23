@@ -25,7 +25,7 @@ class AnalysisPipeline:
             out = await module.analyze(ctx)
             signals.extend(out)
         meta = {
-            "analyzed_at": dt.datetime.utcnow().isoformat() + "Z",
+            "analyzed_at": dt.datetime.now(dt.UTC).isoformat(),
             "module_count": len(self.modules),
         }
         return signals, meta
