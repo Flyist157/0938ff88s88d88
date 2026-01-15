@@ -258,5 +258,396 @@ Object.values(profileFields).forEach((field) => {
 
 updateProfilePreview();
 
+const funnelInputs = {
+  category: document.getElementById("funnel-category"),
+  details: document.getElementById("funnel-details"),
+  location: document.getElementById("funnel-location"),
+  budget: document.getElementById("funnel-budget"),
+  timeline: document.getElementById("funnel-timeline"),
+  property: document.getElementById("funnel-property"),
+  contact: document.getElementById("funnel-contact"),
+};
+const funnelSubmit = document.getElementById("funnel-submit");
+const matchResults = document.getElementById("match-results");
+const fullMatchCount = document.getElementById("full-match-count");
+const partialMatchCount = document.getElementById("partial-match-count");
+
+const proDirectory = [
+  {
+    id: 1,
+    name: "Apex Plumbing Co.",
+    categories: ["Plumbing"],
+    serviceAreas: ["Austin, TX", "Round Rock, TX"],
+    minBudget: 90,
+    maxBudget: 600,
+    responseTimeHours: 2,
+    rating: 4.9,
+    reviews: 45,
+    acceptanceRate: "78%",
+    startingPrice: "$120",
+    tags: ["Verified", "Background checked"],
+    propertyTypes: ["House", "Apartment"],
+    keywords: ["sink", "faucet", "leak", "pipe"],
+  },
+  {
+    id: 2,
+    name: "Riverbend Landscaping",
+    categories: ["Landscaping"],
+    serviceAreas: ["Austin, TX", "Pflugerville, TX"],
+    minBudget: 300,
+    maxBudget: 2200,
+    responseTimeHours: 8,
+    rating: 4.7,
+    reviews: 62,
+    acceptanceRate: "82%",
+    startingPrice: "$350",
+    tags: ["Top rated", "Insured"],
+    propertyTypes: ["House", "Commercial"],
+    keywords: ["lawn", "irrigation", "mulch", "tree"],
+  },
+  {
+    id: 3,
+    name: "Sparkle Home Cleaners",
+    categories: ["House cleaning"],
+    serviceAreas: ["Austin, TX", "Cedar Park, TX"],
+    minBudget: 120,
+    maxBudget: 450,
+    responseTimeHours: 4,
+    rating: 4.8,
+    reviews: 104,
+    acceptanceRate: "90%",
+    startingPrice: "$140",
+    tags: ["Verified", "Eco-friendly"],
+    propertyTypes: ["House", "Apartment"],
+    keywords: ["deep clean", "move out", "kitchen", "bathroom"],
+  },
+  {
+    id: 4,
+    name: "Peak Performance Training",
+    categories: ["Personal training"],
+    serviceAreas: ["Austin, TX"],
+    minBudget: 80,
+    maxBudget: 500,
+    responseTimeHours: 12,
+    rating: 4.6,
+    reviews: 29,
+    acceptanceRate: "70%",
+    startingPrice: "$95",
+    tags: ["Certified", "Mobile"],
+    propertyTypes: ["House", "Apartment"],
+    keywords: ["strength", "weight loss", "fitness", "mobility"],
+  },
+  {
+    id: 5,
+    name: "Luxe Mobile Beauty",
+    categories: ["Mobile beauty"],
+    serviceAreas: ["Austin, TX", "Bee Cave, TX"],
+    minBudget: 100,
+    maxBudget: 900,
+    responseTimeHours: 3,
+    rating: 4.9,
+    reviews: 58,
+    acceptanceRate: "88%",
+    startingPrice: "$150",
+    tags: ["Top rated", "On-site"],
+    propertyTypes: ["House", "Apartment", "Commercial"],
+    keywords: ["hair", "makeup", "event", "wedding"],
+  },
+  {
+    id: 6,
+    name: "Bluebonnet Plumbing & Drain",
+    categories: ["Plumbing"],
+    serviceAreas: ["Austin, TX", "Kyle, TX"],
+    minBudget: 150,
+    maxBudget: 1500,
+    responseTimeHours: 1,
+    rating: 4.8,
+    reviews: 76,
+    acceptanceRate: "86%",
+    startingPrice: "$175",
+    tags: ["Emergency ready", "Verified"],
+    propertyTypes: ["House", "Commercial"],
+    keywords: ["drain", "clog", "water heater", "leak"],
+  },
+];
+
+const budgetRanges = {
+  "100-300": { min: 100, max: 300 },
+  "300-800": { min: 300, max: 800 },
+  "800-1500": { min: 800, max: 1500 },
+  "1500-3000": { min: 1500, max: 3000 },
+};
+
+const timelineTargets = {
+  "24h": 4,
+  week: 24,
+  flex: 72,
+};
+
+const normalize = (value) => (value || "").trim().toLowerCase();
+
+const matchesLocation = (location, areas) => {
+  const target = normalize(location);
+  if (!target) {
+    return false;
+  }
+  return areas.some((area) => {
+    const normalizedArea = normalize(area);
+    return normalizedArea.includes(target) || target.includes(normalizedArea);
+  });
+};
+
+const matchesKeywords = (details, keywords) => {
+  const text = normalize(details);
+  if (!text) {
+    return false;
+  }
+  return keywords.some((keyword) => text.includes(normalize(keyword)));
+};
+
+const buildMatchScore = (pro, criteria) => {
+  const reasons = [];
+  let score = 0;
+
+  if (criteria.categoryMatch) {
+    score += 40;
+    reasons.push("Category");
+  }
+
+  if (criteria.locationMatch) {
+    score += 25;
+    reasons.push("Location");
+  }
+
+  if (criteria.budgetMatch) {
+    score += 20;
+    reasons.push("Budget");
+  } else if (criteria.budgetNearMatch) {
+    score += 10;
+    reasons.push("Budget close");
+  }
+
+  if (criteria.timelineMatch) {
+    score += 10;
+    reasons.push("Response time");
+  }
+
+  if (criteria.propertyMatch) {
+    score += 5;
+    reasons.push("Property type");
+  }
+
+  if (criteria.keywordMatch) {
+    score += 5;
+    reasons.push("Project details");
+  }
+
+  score += Math.round(pro.rating * 2);
+
+  return { score, reasons };
+};
+
+const buildMatchCard = (match) => {
+  const card = document.createElement("div");
+  card.className = "match-card";
+  card.dataset.tier = match.isFull ? "full" : "partial";
+
+  const header = document.createElement("div");
+  header.className = "match-header";
+
+  const info = document.createElement("div");
+  const name = document.createElement("h4");
+  name.textContent = match.pro.name;
+  const subtitle = document.createElement("p");
+  subtitle.className = "subtle";
+  subtitle.textContent = `${match.pro.categories[0]} - ${match.pro.serviceAreas[0]}`;
+  info.appendChild(name);
+  info.appendChild(subtitle);
+
+  const scoreWrap = document.createElement("div");
+  const score = document.createElement("div");
+  score.className = "match-score";
+  score.textContent = `${match.percent}% match`;
+  const status = document.createElement("div");
+  status.className = "match-status";
+  status.textContent = match.isFull ? "Full match" : "Partial match";
+  scoreWrap.appendChild(score);
+  scoreWrap.appendChild(status);
+
+  header.appendChild(info);
+  header.appendChild(scoreWrap);
+
+  const tags = document.createElement("div");
+  tags.className = "match-tags";
+  match.pro.tags.forEach((tag) => {
+    const badge = document.createElement("span");
+    badge.className = "badge subtle";
+    badge.textContent = tag;
+    tags.appendChild(badge);
+  });
+
+  const meta = document.createElement("div");
+  meta.className = "match-meta";
+  meta.innerHTML = `
+    <div>
+      <span class="label">Response</span>
+      <strong>Within ${match.pro.responseTimeHours} hours</strong>
+    </div>
+    <div>
+      <span class="label">Acceptance</span>
+      <strong>${match.pro.acceptanceRate}</strong>
+    </div>
+    <div>
+      <span class="label">Starting at</span>
+      <strong>${match.pro.startingPrice}</strong>
+    </div>
+  `;
+
+  const reasons = document.createElement("p");
+  reasons.className = "note";
+  reasons.textContent = match.reasons.length
+    ? `Matched on: ${match.reasons.join(", ")}.`
+    : "Limited match based on availability.";
+
+  const actions = document.createElement("div");
+  actions.className = "match-actions";
+  const viewButton = document.createElement("button");
+  viewButton.className = "button primary";
+  viewButton.textContent = "View profile";
+  const requestButton = document.createElement("button");
+  requestButton.className = "button ghost";
+  requestButton.textContent = "Request quote";
+  actions.appendChild(viewButton);
+  actions.appendChild(requestButton);
+
+  card.appendChild(header);
+  card.appendChild(tags);
+  card.appendChild(meta);
+  card.appendChild(reasons);
+  card.appendChild(actions);
+
+  return card;
+};
+
+const renderMatches = (fullMatches, partialMatches) => {
+  if (!matchResults) {
+    return;
+  }
+
+  matchResults.innerHTML = "";
+
+  if (fullMatchCount) {
+    fullMatchCount.textContent = fullMatches.length;
+  }
+  if (partialMatchCount) {
+    partialMatchCount.textContent = partialMatches.length;
+  }
+
+  if (fullMatches.length === 0 && partialMatches.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "note";
+    empty.textContent = "No matches yet. Try adjusting your details.";
+    matchResults.appendChild(empty);
+    return;
+  }
+
+  if (fullMatches.length) {
+    const label = document.createElement("p");
+    label.className = "match-status";
+    label.textContent = "Full matches";
+    matchResults.appendChild(label);
+    fullMatches.forEach((match) => matchResults.appendChild(buildMatchCard(match)));
+  }
+
+  if (partialMatches.length) {
+    const label = document.createElement("p");
+    label.className = "match-status";
+    label.textContent = "Partial matches";
+    matchResults.appendChild(label);
+    partialMatches.forEach((match) =>
+      matchResults.appendChild(buildMatchCard(match))
+    );
+  }
+};
+
+const updateMatches = () => {
+  if (!matchResults || !funnelInputs.category) {
+    return;
+  }
+
+  const selectedCategory = funnelInputs.category.value;
+  const location = funnelInputs.location?.value || "";
+  const details = funnelInputs.details?.value || "";
+  const budgetRange = budgetRanges[funnelInputs.budget?.value];
+  const timelineLimit = timelineTargets[funnelInputs.timeline?.value];
+  const propertyType = funnelInputs.property?.value || "";
+
+  const matches = proDirectory.map((pro) => {
+    const categoryMatch = pro.categories.includes(selectedCategory);
+    const locationMatch = matchesLocation(location, pro.serviceAreas);
+    const budgetMatch = budgetRange
+      ? pro.minBudget <= budgetRange.max && pro.maxBudget >= budgetRange.min
+      : false;
+    const budgetNearMatch =
+      !budgetMatch && budgetRange
+        ? pro.minBudget <= budgetRange.max * 1.2 &&
+          pro.maxBudget >= budgetRange.min * 0.8
+        : false;
+    const timelineMatch =
+      typeof timelineLimit === "number"
+        ? pro.responseTimeHours <= timelineLimit
+        : false;
+    const propertyMatch = propertyType
+      ? pro.propertyTypes.includes(propertyType)
+      : false;
+    const keywordMatch = matchesKeywords(details, pro.keywords);
+
+    const { score, reasons } = buildMatchScore(pro, {
+      categoryMatch,
+      locationMatch,
+      budgetMatch,
+      budgetNearMatch,
+      timelineMatch,
+      propertyMatch,
+      keywordMatch,
+    });
+
+    const maxScore = 115;
+    const percent = Math.min(100, Math.round((score / maxScore) * 100));
+    const isFull = categoryMatch && locationMatch && budgetMatch;
+
+    return {
+      pro,
+      score,
+      percent,
+      isFull,
+      reasons,
+    };
+  });
+
+  const sortedMatches = matches
+    .filter((match) => match.score >= 30)
+    .sort((a, b) => b.score - a.score);
+
+  const fullMatches = sortedMatches.filter((match) => match.isFull);
+  const partialMatches = sortedMatches.filter((match) => !match.isFull);
+
+  renderMatches(fullMatches, partialMatches);
+};
+
+Object.values(funnelInputs).forEach((field) => {
+  if (!field) {
+    return;
+  }
+  field.addEventListener("input", updateMatches);
+  field.addEventListener("change", updateMatches);
+});
+
+if (funnelSubmit) {
+  funnelSubmit.addEventListener("click", updateMatches);
+}
+
+updateMatches();
+
 updateRole("pro");
 resetLeadDemo();

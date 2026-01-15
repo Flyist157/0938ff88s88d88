@@ -18,6 +18,7 @@
         <div class="nav-links">
           <a href="#how-it-works">How it works</a>
           <a href="#lead-demo">Lead demo</a>
+          <a href="#customer-funnel">Customer funnel</a>
           <a href="#directory">Directory</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
@@ -186,6 +187,144 @@
                 </label>
               </div>
               <button class="button primary full">Save preferences</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="customer-funnel" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Customer intake funnel</h2>
+            <p>
+              Customers share their needs after clicking an ad. We match them to
+              the best pros based on job details and fit.
+            </p>
+          </div>
+          <div class="funnel-grid">
+            <div class="card">
+              <h3>Tell us about your project</h3>
+              <p class="subtle">
+                The more details you share, the better the matches.
+              </p>
+              <form id="funnel-form" class="funnel-form">
+                <label>
+                  Service category
+                  <select id="funnel-category">
+                    <option selected>Plumbing</option>
+                    <option>House cleaning</option>
+                    <option>Landscaping</option>
+                    <option>Personal training</option>
+                    <option>Mobile beauty</option>
+                  </select>
+                </label>
+                <label>
+                  Project details
+                  <textarea
+                    id="funnel-details"
+                    rows="3"
+                  >Need a kitchen sink replaced and a leak fixed.</textarea>
+                </label>
+                <div class="funnel-row">
+                  <label>
+                    Location
+                    <input
+                      id="funnel-location"
+                      type="text"
+                      value="Austin, TX"
+                    />
+                  </label>
+                  <label>
+                    Budget range
+                    <select id="funnel-budget">
+                      <option value="100-300" selected>$100 to $300</option>
+                      <option value="300-800">$300 to $800</option>
+                      <option value="800-1500">$800 to $1,500</option>
+                      <option value="1500-3000">$1,500 to $3,000</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="funnel-row">
+                  <label>
+                    Timeline
+                    <select id="funnel-timeline">
+                      <option value="24h">Within 24 hours</option>
+                      <option value="week" selected>Within a week</option>
+                      <option value="flex">Flexible</option>
+                    </select>
+                  </label>
+                  <label>
+                    Property type
+                    <select id="funnel-property">
+                      <option selected>House</option>
+                      <option>Apartment</option>
+                      <option>Commercial</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  Contact preference
+                  <select id="funnel-contact">
+                    <option selected>Text or call</option>
+                    <option>Email only</option>
+                    <option>In-app message</option>
+                  </select>
+                </label>
+                <button
+                  id="funnel-submit"
+                  class="button primary full"
+                  type="button"
+                >
+                  Match me with pros
+                </button>
+              </form>
+              <p class="note">
+                Only pros who match your criteria see your request.
+              </p>
+            </div>
+            <div class="card">
+              <div class="results-header">
+                <div>
+                  <h3>Best matches</h3>
+                  <p class="subtle">Full and partial matches ranked by fit.</p>
+                </div>
+                <div class="results-counts">
+                  <span
+                    ><strong id="full-match-count">0</strong> full matches</span
+                  >
+                  <span
+                    ><strong id="partial-match-count">0</strong> partial</span
+                  >
+                </div>
+              </div>
+              <div id="match-results" class="match-results"></div>
+              <div class="results-note">
+                <span class="badge subtle">Full match</span>
+                <span class="subtle"
+                  >Meets category, location, and budget filters.</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="grid three directory-highlights">
+            <div class="card">
+              <h3>Smart intake questions</h3>
+              <p>
+                We capture scope, budget, and timing so pros can reply faster.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Match scoring</h3>
+              <p>
+                Pros are ranked by service fit, distance, and response time.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Client choice</h3>
+              <p>
+                Customers compare profiles, reviews, and pricing before reaching
+                out.
+              </p>
             </div>
           </div>
         </div>

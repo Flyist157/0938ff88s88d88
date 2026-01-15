@@ -324,6 +324,141 @@ select {
   border: 1px solid var(--border);
 }
 
+.funnel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.funnel-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.funnel-form label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.funnel-form input,
+.funnel-form select,
+.funnel-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+
+.funnel-form textarea {
+  resize: vertical;
+}
+
+.funnel-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.results-counts {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.match-results {
+  display: grid;
+  gap: 16px;
+  margin: 18px 0;
+}
+
+.match-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  background: #f8fafc;
+  display: grid;
+  gap: 10px;
+}
+
+.match-card[data-tier="full"] {
+  border-color: #0f766e;
+  background: #ecfeff;
+}
+
+.match-card[data-tier="partial"] {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.match-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.match-score {
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.match-status {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.match-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.match-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.match-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.results-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .directory-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
