@@ -193,5 +193,70 @@ const resetLeadDemo = () => {
 
 resetDemo.addEventListener("click", resetLeadDemo);
 
+const profileFields = {
+  name: document.getElementById("profile-name"),
+  category: document.getElementById("profile-category"),
+  area: document.getElementById("profile-area"),
+  response: document.getElementById("profile-response"),
+  acceptance: document.getElementById("profile-acceptance"),
+  price: document.getElementById("profile-price"),
+  bio: document.getElementById("profile-bio"),
+};
+
+const previewElements = {
+  name: document.getElementById("preview-name"),
+  category: document.getElementById("preview-category"),
+  area: document.getElementById("preview-area"),
+  response: document.getElementById("preview-response"),
+  acceptance: document.getElementById("preview-acceptance"),
+  price: document.getElementById("preview-price"),
+  bio: document.getElementById("preview-bio"),
+};
+
+const applyText = (element, value) => {
+  if (!element) {
+    return;
+  }
+  const fallback = element.dataset.default || "";
+  const nextValue = value && value.trim() ? value.trim() : fallback;
+  element.textContent = nextValue;
+};
+
+const applyPrice = (element, value) => {
+  if (!element) {
+    return;
+  }
+  const fallback = element.dataset.default || "";
+  const trimmed = value ? value.trim() : "";
+  if (!trimmed) {
+    element.textContent = fallback;
+    return;
+  }
+  element.textContent = trimmed.startsWith("$") ? trimmed : `$${trimmed}`;
+};
+
+const updateProfilePreview = () => {
+  if (!previewElements.name) {
+    return;
+  }
+  applyText(previewElements.name, profileFields.name?.value);
+  applyText(previewElements.category, profileFields.category?.value);
+  applyText(previewElements.area, profileFields.area?.value);
+  applyText(previewElements.response, profileFields.response?.value);
+  applyText(previewElements.acceptance, profileFields.acceptance?.value);
+  applyPrice(previewElements.price, profileFields.price?.value);
+  applyText(previewElements.bio, profileFields.bio?.value);
+};
+
+Object.values(profileFields).forEach((field) => {
+  if (!field) {
+    return;
+  }
+  field.addEventListener("input", updateProfilePreview);
+  field.addEventListener("change", updateProfilePreview);
+});
+
+updateProfilePreview();
+
 updateRole("pro");
 resetLeadDemo();

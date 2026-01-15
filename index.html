@@ -18,6 +18,7 @@
         <div class="nav-links">
           <a href="#how-it-works">How it works</a>
           <a href="#lead-demo">Lead demo</a>
+          <a href="#directory">Directory</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
         </div>
@@ -216,6 +217,168 @@
               <p>
                 Route leads to the right team member, share notes, and track
                 conversions from lead to booked job.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="directory" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Pros build profiles clients browse</h2>
+            <p>
+              Add your business profile once and show clients the details that
+              matter before they request a lead.
+            </p>
+          </div>
+          <div class="directory-grid">
+            <div class="card">
+              <h3>Add your business profile</h3>
+              <p class="subtle">
+                Control what the client sees, from response time to starting
+                price, before they reach out.
+              </p>
+              <form id="profile-form" class="profile-form">
+                <label>
+                  Business name
+                  <input
+                    type="text"
+                    id="profile-name"
+                    value="Apex Plumbing Co."
+                  />
+                </label>
+                <label>
+                  Category
+                  <select id="profile-category">
+                    <option selected>Plumbing</option>
+                    <option>House cleaning</option>
+                    <option>Landscaping</option>
+                    <option>Personal training</option>
+                    <option>Mobile beauty</option>
+                  </select>
+                </label>
+                <label>
+                  Service area
+                  <input type="text" id="profile-area" value="Austin, TX" />
+                </label>
+                <label>
+                  Typical response time
+                  <select id="profile-response">
+                    <option selected>Within 2 hours</option>
+                    <option>Same day</option>
+                    <option>Within 24 hours</option>
+                    <option>Within 48 hours</option>
+                  </select>
+                </label>
+                <label>
+                  Lead acceptance rate
+                  <select id="profile-acceptance">
+                    <option selected>78%</option>
+                    <option>90%+</option>
+                    <option>60%+</option>
+                    <option>Under 50%</option>
+                  </select>
+                </label>
+                <label>
+                  Starting price
+                  <input type="text" id="profile-price" value="$120" />
+                </label>
+                <label>
+                  Short bio
+                  <textarea id="profile-bio" rows="4">
+Licensed plumbing team specializing in fast repairs and fixture installs.</textarea
+                  >
+                </label>
+                <button class="button primary full" type="button">
+                  Save profile
+                </button>
+              </form>
+              <p class="note">Profiles update the client directory instantly.</p>
+            </div>
+            <div class="card profile-preview-card">
+              <div class="profile-preview-header">
+                <span class="badge">Directory preview</span>
+                <span class="subtle">Visible to clients</span>
+              </div>
+              <div class="profile-listing">
+                <div>
+                  <h3 id="preview-name" data-default="Apex Plumbing Co.">
+                    Apex Plumbing Co.
+                  </h3>
+                  <p id="preview-area" class="subtle" data-default="Austin, TX">
+                    Austin, TX
+                  </p>
+                </div>
+                <div class="profile-rating">
+                  <strong>4.9</strong>
+                  <span class="label">45 reviews</span>
+                </div>
+              </div>
+              <div class="profile-tags">
+                <span
+                  id="preview-category"
+                  data-default="Plumbing"
+                  class="badge subtle"
+                >
+                  Plumbing
+                </span>
+                <span class="badge subtle">Verified</span>
+                <span class="badge subtle">Background checked</span>
+              </div>
+              <p
+                id="preview-bio"
+                class="subtle"
+                data-default="Licensed plumbing team specializing in fast repairs and fixture installs."
+              >
+                Licensed plumbing team specializing in fast repairs and fixture
+                installs.
+              </p>
+              <div class="profile-metrics">
+                <div>
+                  <span class="label">Response time</span>
+                  <strong
+                    id="preview-response"
+                    data-default="Within 2 hours"
+                  >
+                    Within 2 hours
+                  </strong>
+                </div>
+                <div>
+                  <span class="label">Acceptance</span>
+                  <strong id="preview-acceptance" data-default="78%">78%</strong>
+                </div>
+                <div>
+                  <span class="label">Starting at</span>
+                  <strong id="preview-price" data-default="$120">$120</strong>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <button class="button primary full">Request a quote</button>
+                <button class="button ghost full">Message pro</button>
+              </div>
+            </div>
+          </div>
+          <div class="grid three directory-highlights">
+            <div class="card">
+              <h3>Showcase your best work</h3>
+              <p>
+                Upload photos and project highlights so clients can pick the
+                right pro quickly.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Build trust with badges</h3>
+              <p>
+                Verified, insured, and background check badges improve
+                selection.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Set lead fit rules</h3>
+              <p>
+                Pros define budget and job type filters before leads arrive in
+                the inbox.
               </p>
             </div>
           </div>
