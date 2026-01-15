@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LeadPilot - Lead generation with accept or decline control</title>
+    <meta
+      name="description"
+      content="Lead generation for gig workers, freelance professionals, and small service businesses. Pros preview leads and only pay when they accept."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container">
+        <a class="logo" href="#">LeadPilot</a>
+        <div class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#lead-demo">Lead demo</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="nav-actions">
+          <button class="button ghost">Post a job</button>
+          <button class="button primary">Join as a pro</button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-content">
+          <div>
+            <p class="eyebrow">Lead generation built for gig pros and local services</p>
+            <h1 id="hero-title">
+              Preview every lead and pay only when you accept it.
+            </h1>
+            <p id="hero-description" class="lead">
+              LeadPilot matches customers with pros in minutes. Pros see the job details,
+              price, and expected response time before deciding to accept or decline.
+            </p>
+            <div class="hero-actions">
+              <button id="primary-cta" class="button primary">Join as a pro</button>
+              <button id="secondary-cta" class="button ghost">See lead pricing</button>
+            </div>
+            <div class="role-toggle" role="tablist" aria-label="Audience toggle">
+              <button class="toggle active" data-role="pro" role="tab">
+                For pros
+              </button>
+              <button class="toggle" data-role="customer" role="tab">
+                For customers
+              </button>
+            </div>
+            <div class="hero-badges">
+              <span id="hero-badge" class="badge">Pay only on accepted leads</span>
+              <span class="badge subtle">No subscriptions</span>
+              <span class="badge subtle">Set your lead preferences</span>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <span class="badge">New lead</span>
+              <span class="subtle">Respond in 2 hours</span>
+            </div>
+            <h3>Kitchen faucet install</h3>
+            <p class="subtle">
+              Customer in Austin, TX. Budget range $120 to $180.
+            </p>
+            <div class="hero-card-details">
+              <div>
+                <span class="label">Lead price</span>
+                <strong>$18</strong>
+              </div>
+              <div>
+                <span class="label">Lead type</span>
+                <strong>Verified homeowner</strong>
+              </div>
+            </div>
+            <div class="hero-card-actions">
+              <button class="button primary full">Accept lead</button>
+              <button class="button ghost full">Decline</button>
+            </div>
+            <p class="note">
+              You are only charged when you accept. Declining is always free.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>How LeadPilot works</h2>
+            <p>
+              Built to look and feel familiar to Thumbtack style users, but
+              designed for pro control on every lead.
+            </p>
+          </div>
+          <div class="grid three">
+            <div class="card">
+              <h3>Customers post a job</h3>
+              <p>
+                Customers share scope, budget, and timeline in a guided intake
+                form that reduces low quality requests.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Pros get a lead preview</h3>
+              <p>
+                Pros see the job details, lead price, and location before making
+                a decision. No surprise charges.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Accept or decline</h3>
+              <p>
+                Pros accept only the leads that fit their schedule. Payment is
+                triggered only when a lead is accepted.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="lead-demo" class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <h2>Lead inbox demo</h2>
+            <p>
+              See how pros can accept or decline every lead while tracking costs
+              in real time.
+            </p>
+          </div>
+          <div class="lead-demo">
+            <div class="card lead-panel">
+              <div class="lead-stats">
+                <div>
+                  <span class="label">Active leads</span>
+                  <strong id="active-count">0</strong>
+                </div>
+                <div>
+                  <span class="label">Accepted</span>
+                  <strong id="accepted-count">0</strong>
+                </div>
+                <div>
+                  <span class="label">Declined</span>
+                  <strong id="declined-count">0</strong>
+                </div>
+                <div>
+                  <span class="label">Total due</span>
+                  <strong id="total-due">$0</strong>
+                </div>
+              </div>
+              <div id="lead-list" class="lead-list"></div>
+              <div class="lead-actions-row">
+                <button id="reset-demo" class="button ghost">Reset demo</button>
+                <span class="note">Declined leads never increase your cost.</span>
+              </div>
+            </div>
+            <div class="card lead-panel">
+              <h3>Lead activity</h3>
+              <p class="subtle">
+                Each action updates billing so pros only pay for accepted leads.
+              </p>
+              <ul id="lead-log" class="lead-log"></ul>
+              <div class="divider"></div>
+              <h4>Lead preferences</h4>
+              <div class="preferences">
+                <label>
+                  <input type="checkbox" checked />
+                  Home repairs
+                </label>
+                <label>
+                  <input type="checkbox" checked />
+                  Projects under $300
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  Emergency requests
+                </label>
+                <label>
+                  <input type="checkbox" checked />
+                  20 miles from Austin
+                </label>
+              </div>
+              <button class="button primary full">Save preferences</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Designed for the way pros work</h2>
+            <p>Tools that help freelancers and small teams run their pipeline.</p>
+          </div>
+          <div class="grid three">
+            <div class="card">
+              <h3>Lead controls</h3>
+              <p>
+                Filter by budget, distance, job type, and response time before
+                leads ever hit your inbox.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Instant messaging</h3>
+              <p>
+                Message customers as soon as you accept a lead to lock in the
+                job quickly.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Team routing</h3>
+              <p>
+                Route leads to the right team member, share notes, and track
+                conversions from lead to booked job.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <h2>Customer experience that converts</h2>
+            <p>
+              Customers get quick answers, transparent pricing, and the freedom
+              to choose the pro that feels right.
+            </p>
+          </div>
+          <div class="grid two">
+            <div class="card">
+              <h3>Post a job in minutes</h3>
+              <form class="lead-form">
+                <label>
+                  Service needed
+                  <input type="text" placeholder="Plumbing repair" />
+                </label>
+                <label>
+                  City
+                  <input type="text" placeholder="Austin, TX" />
+                </label>
+                <label>
+                  Budget range
+                  <select>
+                    <option>$100 to $300</option>
+                    <option>$300 to $800</option>
+                    <option>$800+</option>
+                  </select>
+                </label>
+                <label>
+                  Timeline
+                  <select>
+                    <option>Within 24 hours</option>
+                    <option>Within a week</option>
+                    <option>Flexible</option>
+                  </select>
+                </label>
+                <button class="button primary full" type="button">
+                  Get matched with pros
+                </button>
+              </form>
+            </div>
+            <div class="card">
+              <h3>Pros stay responsive</h3>
+              <p>
+                Because pros can accept or decline every lead, they only respond
+                to jobs that fit, which means faster replies and higher
+                conversion rates for customers.
+              </p>
+              <div class="stats">
+                <div>
+                  <strong>2 min</strong>
+                  <span class="label">Average first response</span>
+                </div>
+                <div>
+                  <strong>4.8</strong>
+                  <span class="label">Average pro rating</span>
+                </div>
+                <div>
+                  <strong>68%</strong>
+                  <span class="label">Lead acceptance rate</span>
+                </div>
+              </div>
+              <button class="button ghost full">Browse top pros</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Simple pay per accepted lead pricing</h2>
+            <p>Pros only pay when they accept the lead. No memberships required.</p>
+          </div>
+          <div class="grid three">
+            <div class="card pricing-card">
+              <h3>Starter</h3>
+              <p class="price">$15</p>
+              <p class="subtle">Typical lead price for small jobs.</p>
+              <ul>
+                <li>Accept or decline every lead</li>
+                <li>Unlimited messaging</li>
+                <li>No monthly subscription</li>
+              </ul>
+            </div>
+            <div class="card pricing-card highlight">
+              <h3>Growth</h3>
+              <p class="price">$25</p>
+              <p class="subtle">Best for repeatable service calls.</p>
+              <ul>
+                <li>Team routing and lead tagging</li>
+                <li>Instant job alerts</li>
+                <li>Priority support</li>
+              </ul>
+            </div>
+            <div class="card pricing-card">
+              <h3>Premium</h3>
+              <p class="price">$40</p>
+              <p class="subtle">Ideal for higher value projects.</p>
+              <ul>
+                <li>Exclusive lead option</li>
+                <li>Dedicated account manager</li>
+                <li>Advanced reporting</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pricing-note">
+            Only accepted leads are billed. Declined leads are always free.
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <h2>FAQ</h2>
+            <p>Answers to common questions from pros and customers.</p>
+          </div>
+          <div class="grid two">
+            <div class="card">
+              <h3>How is this different from Thumbtack?</h3>
+              <p>
+                LeadPilot lets pros accept or decline every lead. You only pay
+                after you accept, not just for receiving the lead.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Can I set lead filters?</h3>
+              <p>
+                Yes. Pros can control budget, service area, response windows,
+                and job types so the inbox stays relevant.
+              </p>
+            </div>
+            <div class="card">
+              <h3>How do customers get matched?</h3>
+              <p>
+                Customers submit a short request. The platform recommends pros
+                who match the job and availability.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Is there a monthly fee?</h3>
+              <p>
+                No. There are no subscriptions required. Pros pay only when they
+                accept a lead.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cta-section">
+        <div class="container cta-card">
+          <div>
+            <h2>Launch your lead generation platform</h2>
+            <p class="lead">
+              Give pros control and build trust with customers using a
+              pay-on-accept lead model.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <button class="button primary">Start with LeadPilot</button>
+            <button class="button ghost">Talk to sales</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>LeadPilot</strong>
+          <p class="subtle">
+            Lead generation for gig workers, freelancers, and service teams.
+          </p>
+        </div>
+        <div>
+          <p class="label">Product</p>
+          <a href="#how-it-works">How it works</a>
+          <a href="#lead-demo">Lead demo</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div>
+          <p class="label">Company</p>
+          <a href="#">About</a>
+          <a href="#">Support</a>
+          <a href="#">Privacy</a>
+        </div>
+        <div>
+          <p class="label">Get started</p>
+          <button class="button primary full">Join as a pro</button>
+        </div>
+      </div>
+      <p class="copyright">© 2026 LeadPilot. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
