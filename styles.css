@@ -58,9 +58,21 @@ ul {
 }
 
 .logo {
-  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-weight: 700;
   letter-spacing: 0.3px;
+}
+
+.logo-image {
+  display: block;
+  height: 44px;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 1.2rem;
 }
 
 .nav-links {
@@ -585,6 +597,12 @@ ul {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+.footer-logo {
+  height: 48px;
+  width: auto;
+  margin-bottom: 12px;
+}
+
 .footer a {
   color: #ffffff;
 }
@@ -620,5 +638,13 @@ ul {
   .quote-card,
   .contact-panel {
     padding: 22px;
+  }
+
+  .logo-image {
+    height: 36px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
   }
 }
