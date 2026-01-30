@@ -1,13 +1,13 @@
 :root {
-  --primary: #ff3d81;
-  --secondary: #2ad9ff;
-  --accent: #ffb347;
-  --dark: #1b1b2b;
-  --soft: #f5f6ff;
-  --text: #1b1b2b;
-  --muted: #5b5f79;
-  --gradient: linear-gradient(120deg, #ff3d81 0%, #7b61ff 45%, #2ad9ff 100%);
-  --gradient-dark: linear-gradient(120deg, #1b1b2b 0%, #2b2f5f 100%);
+  --primary: #0b5fb3;
+  --secondary: #1fa2d6;
+  --accent: #7ad6f7;
+  --dark: #0b1f3a;
+  --soft: #f1f7fb;
+  --text: #0b1f3a;
+  --muted: #4f6f8f;
+  --gradient: linear-gradient(120deg, #0b4ea2 0%, #1478c6 48%, #62c7f4 100%);
+  --gradient-dark: linear-gradient(120deg, #0b1f3a 0%, #103a67 100%);
 }
 
 * {
@@ -22,7 +22,7 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background: #f4f5ff;
+  background: #eef4fa;
   color: var(--text);
   line-height: 1.6;
 }
@@ -88,7 +88,7 @@ ul {
 }
 
 .nav-links a:hover {
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 .btn {
@@ -109,8 +109,8 @@ ul {
 }
 
 .btn-primary {
-  background: #ffffff;
-  color: var(--dark);
+  background: var(--primary);
+  color: #ffffff;
 }
 
 .btn-outline {
@@ -283,7 +283,7 @@ ul {
 }
 
 .divider--light {
-  background: linear-gradient(120deg, #fff0f7, #e8f9ff);
+  background: linear-gradient(120deg, #e6f4ff, #f5fbff);
 }
 
 .divider--dark {
@@ -386,8 +386,8 @@ ul {
 }
 
 .system-card.highlight {
-  border: 2px solid rgba(123, 97, 255, 0.3);
-  background: linear-gradient(160deg, #ffffff, #f0edff);
+  border: 2px solid rgba(11, 95, 179, 0.25);
+  background: linear-gradient(160deg, #ffffff, #eaf4ff);
 }
 
 .color-grid {
@@ -503,7 +503,7 @@ ul {
 }
 
 .sales {
-  background: linear-gradient(120deg, #fff1f8, #eaf6ff);
+  background: linear-gradient(120deg, #e6f4ff, #f5fbff);
 }
 
 .sales-content {
