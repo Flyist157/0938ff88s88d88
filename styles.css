@@ -67,12 +67,12 @@ ul {
 
 .logo-image {
   display: block;
-  height: 44px;
+  height: 72px;
   width: auto;
 }
 
 .logo-text {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
 }
 
 .nav-links {
@@ -713,7 +713,7 @@ ul {
 }
 
 .footer-logo {
-  height: 48px;
+  height: 72px;
   width: auto;
   margin-bottom: 12px;
 }
@@ -739,6 +739,10 @@ ul {
   .hero {
     padding-top: 80px;
   }
+
+  .logo-image {
+    height: 64px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -756,10 +760,10 @@ ul {
   }
 
   .logo-image {
-    height: 36px;
+    height: 52px;
   }
 
   .logo-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
