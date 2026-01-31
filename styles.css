@@ -478,11 +478,18 @@ ul {
   color: var(--muted);
 }
 
+.photo-note {
+  text-align: center;
+  margin-top: 18px;
+  color: var(--muted);
+}
+
 .simiron-grid {
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .simiron-card {
+  margin: 0;
   background: #ffffff;
   border-radius: 18px;
   padding: 16px;
@@ -491,61 +498,22 @@ ul {
   gap: 8px;
 }
 
+.simiron-image {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  background: #ffffff;
+}
+
+.simiron-card figcaption {
+  display: grid;
+  gap: 6px;
+}
+
 .simiron-card p {
   color: var(--muted);
   font-size: 0.95rem;
-}
-
-.simiron-chip {
-  height: 120px;
-  border-radius: 14px;
-}
-
-.simiron-1 {
-  background: linear-gradient(135deg, #e6edf4, #c1d1df, #8aa3b8);
-}
-
-.simiron-2 {
-  background: linear-gradient(135deg, #f2e4d4, #d7b894, #b48c64);
-}
-
-.simiron-3 {
-  background: linear-gradient(135deg, #dbe8f3, #98b2c7, #4e6b82);
-}
-
-.simiron-4 {
-  background: linear-gradient(135deg, #2d3138, #5c636e, #9aa3ad);
-}
-
-.simiron-5 {
-  background: radial-gradient(circle at 20% 30%, #ffffff 0%, #ffffff 6%, transparent 7%),
-    radial-gradient(circle at 70% 40%, #8aa3b8 0%, #8aa3b8 5%, transparent 6%),
-    radial-gradient(circle at 40% 75%, #1f4d73 0%, #1f4d73 4%, transparent 5%),
-    radial-gradient(circle at 80% 70%, #e9f2f8 0%, #e9f2f8 7%, transparent 8%),
-    linear-gradient(135deg, #d7e0ea, #b8c8d8);
-}
-
-.simiron-6 {
-  background: radial-gradient(circle at 20% 30%, #ffffff 0%, #ffffff 5%, transparent 6%),
-    radial-gradient(circle at 70% 40%, #6c7a88 0%, #6c7a88 5%, transparent 6%),
-    radial-gradient(circle at 40% 75%, #1d2a35 0%, #1d2a35 4%, transparent 5%),
-    radial-gradient(circle at 80% 70%, #c5ced6 0%, #c5ced6 7%, transparent 8%),
-    linear-gradient(135deg, #c9d2da, #8d9aa6);
-}
-
-.simiron-7 {
-  background: repeating-linear-gradient(
-      135deg,
-      rgba(11, 31, 58, 0.18) 0,
-      rgba(11, 31, 58, 0.18) 6px,
-      transparent 6px,
-      transparent 12px
-    ),
-    linear-gradient(135deg, #d5dde5, #9fb2c4);
-}
-
-.simiron-8 {
-  background: radial-gradient(circle at 30% 20%, #e7f5ff 0%, #b7ddf3 35%, #0b5fb3 100%);
 }
 
 .simiron-note {

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="flake-base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d7e0ea"/>
+      <stop offset="1" stop-color="#b8c8d8"/>
+    </linearGradient>
+    <pattern id="flake-pattern" width="140" height="140" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="24" r="6" fill="#ffffff"/>
+      <circle cx="54" cy="38" r="5" fill="#8aa3b8"/>
+      <circle cx="92" cy="18" r="4" fill="#1f4d73"/>
+      <circle cx="118" cy="62" r="6" fill="#e9f2f8"/>
+      <circle cx="36" cy="92" r="4" fill="#6c7a88"/>
+      <circle cx="78" cy="86" r="5" fill="#ffffff"/>
+      <circle cx="110" cy="108" r="4" fill="#1d2a35"/>
+      <circle cx="22" cy="122" r="5" fill="#c5ced6"/>
+      <circle cx="66" cy="122" r="4" fill="#8aa3b8"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#flake-base)"/>
+  <rect width="1200" height="800" fill="url(#flake-pattern)" opacity="0.95"/>
+  <rect
+    width="1200"
+    height="800"
+    fill="url(#flake-pattern)"
+    opacity="0.55"
+    transform="translate(40 60)"
+  />
+</svg>
