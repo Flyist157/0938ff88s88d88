@@ -407,6 +407,153 @@ ul {
   margin-bottom: 16px;
 }
 
+.photo-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.photo-card {
+  margin: 0;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(17, 20, 48, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-placeholder {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  background: var(--gradient);
+}
+
+.photo-placeholder.metallic {
+  background: linear-gradient(135deg, #0b4ea2, #62c7f4, #cbe9f8);
+}
+
+.photo-placeholder.flake {
+  background: radial-gradient(circle at 20% 30%, #ffffff 0%, #ffffff 6%, transparent 7%),
+    radial-gradient(circle at 70% 40%, #8aa3b8 0%, #8aa3b8 5%, transparent 6%),
+    radial-gradient(circle at 40% 75%, #1f4d73 0%, #1f4d73 4%, transparent 5%),
+    radial-gradient(circle at 80% 70%, #e9f2f8 0%, #e9f2f8 7%, transparent 8%),
+    linear-gradient(135deg, #d7e0ea, #b8c8d8);
+}
+
+.photo-placeholder.solid {
+  background: linear-gradient(135deg, #0b5fb3, #1fa2d6);
+}
+
+.photo-placeholder.friction {
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.18) 0,
+      rgba(255, 255, 255, 0.18) 6px,
+      transparent 6px,
+      transparent 12px
+    ),
+    linear-gradient(135deg, #0b3a6f, #1478c6);
+}
+
+.photo-content {
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.photo-content p {
+  color: var(--muted);
+}
+
+.simiron-grid {
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.simiron-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 12px 24px rgba(17, 20, 48, 0.08);
+  display: grid;
+  gap: 8px;
+}
+
+.simiron-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.simiron-chip {
+  height: 120px;
+  border-radius: 14px;
+}
+
+.simiron-1 {
+  background: linear-gradient(135deg, #e6edf4, #c1d1df, #8aa3b8);
+}
+
+.simiron-2 {
+  background: linear-gradient(135deg, #f2e4d4, #d7b894, #b48c64);
+}
+
+.simiron-3 {
+  background: linear-gradient(135deg, #dbe8f3, #98b2c7, #4e6b82);
+}
+
+.simiron-4 {
+  background: linear-gradient(135deg, #2d3138, #5c636e, #9aa3ad);
+}
+
+.simiron-5 {
+  background: radial-gradient(circle at 20% 30%, #ffffff 0%, #ffffff 6%, transparent 7%),
+    radial-gradient(circle at 70% 40%, #8aa3b8 0%, #8aa3b8 5%, transparent 6%),
+    radial-gradient(circle at 40% 75%, #1f4d73 0%, #1f4d73 4%, transparent 5%),
+    radial-gradient(circle at 80% 70%, #e9f2f8 0%, #e9f2f8 7%, transparent 8%),
+    linear-gradient(135deg, #d7e0ea, #b8c8d8);
+}
+
+.simiron-6 {
+  background: radial-gradient(circle at 20% 30%, #ffffff 0%, #ffffff 5%, transparent 6%),
+    radial-gradient(circle at 70% 40%, #6c7a88 0%, #6c7a88 5%, transparent 6%),
+    radial-gradient(circle at 40% 75%, #1d2a35 0%, #1d2a35 4%, transparent 5%),
+    radial-gradient(circle at 80% 70%, #c5ced6 0%, #c5ced6 7%, transparent 8%),
+    linear-gradient(135deg, #c9d2da, #8d9aa6);
+}
+
+.simiron-7 {
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(11, 31, 58, 0.18) 0,
+      rgba(11, 31, 58, 0.18) 6px,
+      transparent 6px,
+      transparent 12px
+    ),
+    linear-gradient(135deg, #d5dde5, #9fb2c4);
+}
+
+.simiron-8 {
+  background: radial-gradient(circle at 30% 20%, #e7f5ff 0%, #b7ddf3 35%, #0b5fb3 100%);
+}
+
+.simiron-note {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--muted);
+}
+
 .chip-1 {
   background: linear-gradient(135deg, #e8edf3, #8ba3b5, #394b59);
 }
