@@ -69,10 +69,10 @@ ul {
 
 .logo-image {
   display: block;
-  height: 110px;
+  height: 130px;
   width: auto;
-  margin-top: -26px;
-  margin-bottom: -10px;
+  margin-top: -36px;
+  margin-bottom: -14px;
   filter: drop-shadow(0 12px 24px rgba(11, 31, 58, 0.18));
 }
 
@@ -237,8 +237,8 @@ ul {
 
 .swatch-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+  gap: 10px;
   background: rgba(255, 255, 255, 0.2);
   padding: 16px;
   border-radius: 18px;
@@ -246,40 +246,65 @@ ul {
 
 .swatch {
   display: block;
-  height: 52px;
+  height: 48px;
   border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .swatch-1 {
-  background: linear-gradient(140deg, #0d1b2a, #3a506b, #ffffff);
+  background: #0b0c10;
 }
 
 .swatch-2 {
-  background: linear-gradient(140deg, #2f2f2f, #ffb347, #ffe1b0);
+  background: #7b7d81;
 }
 
 .swatch-3 {
-  background: linear-gradient(140deg, #1b1b2b, #7b61ff, #2ad9ff);
+  background: #a2a5a9;
 }
 
 .swatch-4 {
-  background: linear-gradient(140deg, #4d4d4d, #d9d9d9, #ffffff);
+  background: #c7c9cc;
 }
 
 .swatch-5 {
-  background: linear-gradient(140deg, #273043, #f26b38, #f7c59f);
+  background: #e7d6c5;
 }
 
 .swatch-6 {
-  background: linear-gradient(140deg, #1e3a5f, #69c6d6, #d4f4f9);
+  background: #e8dfd1;
 }
 
 .swatch-7 {
-  background: linear-gradient(140deg, #1f1f1f, #ff3d81, #ffd6e6);
+  background: #b47b78;
 }
 
 .swatch-8 {
-  background: linear-gradient(140deg, #3c3c3c, #9fa8da, #f1f1ff);
+  background: #6cc9f2;
+}
+
+.swatch-9 {
+  background: #ffffff;
+}
+
+.swatch-10 {
+  background: #5b92a7;
+}
+
+.swatch-11 {
+  background: #d47b76;
+}
+
+.swatch-12 {
+  background: #8a9b7b;
+}
+
+.swatch-13 {
+  background: #e29a62;
+}
+
+.swatch-14 {
+  background: #f2cf63;
 }
 
 .divider {
@@ -747,9 +772,9 @@ ul {
   }
 
   .logo-image {
-    height: 92px;
-    margin-top: -20px;
-    margin-bottom: -8px;
+    height: 110px;
+    margin-top: -28px;
+    margin-bottom: -10px;
   }
 }
 
@@ -768,9 +793,9 @@ ul {
   }
 
   .logo-image {
-    height: 76px;
-    margin-top: -16px;
-    margin-bottom: -6px;
+    height: 88px;
+    margin-top: -20px;
+    margin-bottom: -8px;
   }
 
   .logo-text {
