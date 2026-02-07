@@ -301,6 +301,72 @@
         </p>
       </section>
 
+      <section id="customizer" class="section customizer">
+        <div class="section-header">
+          <p class="eyebrow">Customize your floor system</p>
+          <h2>Build the right system for your space in real time.</h2>
+          <p>
+            Select a floor type, system, color, and additives to preview how your
+            finished floor can look before we install.
+          </p>
+        </div>
+        <div class="customizer-layout">
+          <div class="customizer-controls">
+            <div class="control-group">
+              <label for="floorType">Floor type</label>
+              <select id="floorType">
+                <option value="residential-garage">Residential garage</option>
+                <option value="commercial-garage">Commercial garage</option>
+                <option value="warehouse">Warehouse</option>
+                <option value="aircraft-hangar">Aircraft hangar</option>
+                <option value="commercial-kitchen">Commercial kitchen</option>
+                <option value="outdoor-patio">Outdoor patio</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <p class="control-label">Coating system</p>
+              <div class="option-buttons" id="coatingOptions">
+                <button type="button" class="option-button is-active" data-coating="solid">
+                  Solid color polyaspartic
+                </button>
+                <button type="button" class="option-button" data-coating="flake">
+                  Polyaspartic flake system
+                </button>
+                <button type="button" class="option-button" data-coating="solid-texture">
+                  Solid color + texture additive
+                </button>
+              </div>
+            </div>
+            <div class="control-group">
+              <p class="control-label">Additives</p>
+              <div class="toggle-list">
+                <label class="toggle">
+                  <input type="checkbox" id="additiveGrip">
+                  Slip-resistant additive
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="additiveGloss" checked>
+                  Extra gloss topcoat
+                </label>
+              </div>
+            </div>
+            <div class="control-group">
+              <p class="control-label">Color</p>
+              <div class="color-options" id="colorOptions"></div>
+            </div>
+          </div>
+          <div class="customizer-preview">
+            <div class="preview-frame">
+              <canvas id="floorPreview" role="img" aria-label="Floor preview"></canvas>
+            </div>
+            <div class="preview-details">
+              <h3>Your selection</h3>
+              <p id="selectionSummary" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div class="divider divider--dark"></div>
 
       <section id="pricing" class="section pricing">
