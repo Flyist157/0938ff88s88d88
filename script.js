@@ -4,9 +4,13 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
-const customizerSection = document.getElementById("customizer");
+const initCustomizer = () => {
+  const customizerSection = document.getElementById("customizer");
 
-if (customizerSection) {
+  if (!customizerSection) {
+    return;
+  }
+
   const floorTypeSelect = document.getElementById("floorType");
   const coatingOptions = document.querySelectorAll("[data-coating]");
   const colorOptionsContainer = document.getElementById("colorOptions");
@@ -26,8 +30,11 @@ if (customizerSection) {
     selectionSummary;
 
   if (!isCustomizerReady) {
-    console.warn("Customizer is missing required elements.");
-  } else {
+    if (selectionSummary) {
+      selectionSummary.textContent = "Preview unavailable in this browser.";
+    }
+    return;
+  }
 
   const colorOptions = [
     { name: "Jet Black", hex: "#0b0c10" },
@@ -379,7 +386,13 @@ if (customizerSection) {
     updateSummary();
   }
 
+  selectionSummary.textContent = "Preview ready. Choose options above.";
   window.addEventListener("resize", render);
-  render();
-  }
+  window.requestAnimationFrame(render);
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCustomizer);
+} else {
+  initCustomizer();
 }
