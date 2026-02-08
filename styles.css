@@ -457,6 +457,12 @@ ul {
   gap: 10px;
 }
 
+.chip-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px;
+}
+
 .color-option {
   aspect-ratio: 1 / 1;
   border-radius: 12px;
@@ -476,6 +482,52 @@ ul {
   box-shadow: 0 8px 18px rgba(11, 31, 58, 0.18);
 }
 
+.chip-option {
+  border-radius: 14px;
+  padding: 10px;
+  border: 2px solid transparent;
+  background: #f7f9fc;
+  cursor: pointer;
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  min-height: 110px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.chip-option:hover {
+  transform: translateY(-2px);
+}
+
+.chip-option.is-active {
+  border-color: var(--primary);
+  box-shadow: 0 10px 20px rgba(11, 31, 58, 0.18);
+}
+
+.chip-swatch {
+  width: 100%;
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-image:
+    radial-gradient(circle at 20% 30%, var(--chip-a) 0 6px, transparent 7px),
+    radial-gradient(circle at 60% 40%, var(--chip-b) 0 5px, transparent 6px),
+    radial-gradient(circle at 80% 70%, var(--chip-c) 0 6px, transparent 7px),
+    radial-gradient(circle at 30% 80%, var(--chip-b) 0 5px, transparent 6px),
+    radial-gradient(circle at 70% 20%, var(--chip-a) 0 6px, transparent 7px),
+    linear-gradient(135deg, var(--chip-base-1), var(--chip-base-2));
+}
+
+.chip-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.is-hidden {
+  display: none;
+}
+
 .customizer-preview {
   display: grid;
   gap: 16px;
@@ -490,7 +542,7 @@ ul {
 
 #floorPreview {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   display: block;
   border-radius: 16px;
   background: #e9eef5;

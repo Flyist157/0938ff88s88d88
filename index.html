@@ -304,25 +304,14 @@
       <section id="customizer" class="section customizer">
         <div class="section-header">
           <p class="eyebrow">Customize your floor system</p>
-          <h2>Build the right system for your space in real time.</h2>
+          <h2>Preview a top-down finish in real time.</h2>
           <p>
-            Select a floor type, system, color, and additives to preview how your
-            finished floor can look before we install.
+            Choose a coating system, color, and additives to see how your finished
+            floor surface can look before we install.
           </p>
         </div>
         <div class="customizer-layout">
           <div class="customizer-controls">
-            <div class="control-group">
-              <label for="floorType">Floor type</label>
-              <select id="floorType">
-                <option value="residential-garage">Residential garage</option>
-                <option value="commercial-garage">Commercial garage</option>
-                <option value="warehouse">Warehouse</option>
-                <option value="aircraft-hangar">Aircraft hangar</option>
-                <option value="commercial-kitchen">Commercial kitchen</option>
-                <option value="outdoor-patio">Outdoor patio</option>
-              </select>
-            </div>
             <div class="control-group">
               <p class="control-label">Coating system</p>
               <div class="option-buttons" id="coatingOptions">
@@ -350,9 +339,13 @@
                 </label>
               </div>
             </div>
-            <div class="control-group">
-              <p class="control-label">Color</p>
+            <div class="control-group" id="solidColorGroup">
+              <p class="control-label">Solid color</p>
               <div class="color-options" id="colorOptions"></div>
+            </div>
+            <div class="control-group is-hidden" id="chipColorGroup">
+              <p class="control-label">Vinyl chip blend</p>
+              <div class="chip-options" id="chipOptions"></div>
             </div>
           </div>
           <div class="customizer-preview">
@@ -557,6 +550,6 @@
       <p class="footer-bottom">Copyright <span id="year"></span> Blue Fin Surface Coatings.</p>
     </footer>
 
-    <script src="script.js?v=customizer1"></script>
+    <script src="script.js?v=customizer2"></script>
   </body>
 </html>
