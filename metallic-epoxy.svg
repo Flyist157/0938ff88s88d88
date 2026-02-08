@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="metallic-base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b3a6f"/>
+      <stop offset="0.4" stop-color="#1478c6"/>
+      <stop offset="0.75" stop-color="#62c7f4"/>
+      <stop offset="1" stop-color="#cbe9f8"/>
+    </linearGradient>
+    <radialGradient id="metallic-glow" cx="0.3" cy="0.2" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="0.4" stop-color="#9fd6f5" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#0b3a6f" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="metallic-noise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="4"/>
+      <feColorMatrix type="matrix" values="
+        0.7 0 0 0 0
+        0 0.8 0 0 0
+        0 0 1 0 0
+        0 0 0 0.6 0
+      "/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#metallic-base)"/>
+  <rect width="1200" height="800" fill="url(#metallic-glow)"/>
+  <rect width="1200" height="800" filter="url(#metallic-noise)" opacity="0.45"/>
+  <path
+    d="M0 540 C 220 430 420 460 600 350 C 780 240 960 230 1200 280 L1200 800 L0 800 Z"
+    fill="#0b1f3a"
+    opacity="0.15"
+  />
+  <path
+    d="M0 620 C 260 560 420 600 620 520 C 820 440 980 450 1200 500 L1200 800 L0 800 Z"
+    fill="#ffffff"
+    opacity="0.1"
+  />
+</svg>
