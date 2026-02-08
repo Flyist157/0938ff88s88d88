@@ -16,17 +16,18 @@ if (customizerSection) {
   const previewCanvas = document.getElementById("floorPreview");
   const ctx = previewCanvas ? previewCanvas.getContext("2d") : null;
 
-  if (
-    !previewCanvas ||
-    !ctx ||
-    !floorTypeSelect ||
-    !colorOptionsContainer ||
-    !additiveGrip ||
-    !additiveGloss ||
-    !selectionSummary
-  ) {
-    return;
-  }
+  const isCustomizerReady =
+    previewCanvas &&
+    ctx &&
+    floorTypeSelect &&
+    colorOptionsContainer &&
+    additiveGrip &&
+    additiveGloss &&
+    selectionSummary;
+
+  if (!isCustomizerReady) {
+    console.warn("Customizer is missing required elements.");
+  } else {
 
   const colorOptions = [
     { name: "Jet Black", hex: "#0b0c10" },
@@ -380,4 +381,5 @@ if (customizerSection) {
 
   window.addEventListener("resize", render);
   render();
+  }
 }
